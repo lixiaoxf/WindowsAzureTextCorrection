@@ -1,0 +1,2 @@
+# WindowsAzureTextCorrection
+修正Azure项目需要上传的文本内容
