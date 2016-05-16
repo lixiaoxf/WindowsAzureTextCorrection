@@ -29,9 +29,6 @@ githubpages: http://lixiaoxf.github.io/WindowsAzureTextCorrection
 	2. 其余所有出现的标点均改为中文标点（如果为英文标点，则改为中文标点）
 	  例：。，：；‘’“”？！'（）  中文标点
 
-          
-
-
 英文：
 	所有标点均为英文标点
 	例：.,:;''""?!'
