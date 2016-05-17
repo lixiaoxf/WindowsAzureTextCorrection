@@ -97,12 +97,14 @@
                     "wordMiddleSpace":/\b(\s)+\b/g,
                     "wordAfter":/\b\s+(?=[。，；：！（）])/g,
                     "wordAfterCN":/\b(?=[\u4e00-\u9fa5])/g,
+                    "wordAfterfuhaoCN":/\b\s+(?=(。，；：！（）)(\u4e00-\u9fa5))/g,
                     "wordBefore":/([。，；：！（）])\s+\b/g,
                     "wordBeforeCN":/([\u4e00-\u9fa5])\b/g,
                     "fuhaobeforeCN":/([\+\-\*\/])(?=[\u4e00-\u9fa5])/g,
                     "fuhaoafterCN":/([\u4e00-\u9fa5])(?=[\+\-\*\/])/g,
-                    "fuhao,.":/[，。](?=[\w])/g,
+                    "fuhao,.":/\b[，。](?=[\w])/g,
                     "fuhaoAfter":/(%)(?=[\u4e00-\u9fa5])/g
+
                 }
             }
             CNreg.prototype = {
@@ -142,10 +144,12 @@
                 },
                 //单词后根据特定情况增加空格 或去掉空格
                 "__wordAfter" : function(){
+                    var self = this;
                     //单词后是符号不需要空格
-                    this.message = this.message.replace(this.reg["wordAfter"],"")
+                    this.message = this.message.replace(this.reg["wordAfter"],"");
                     //单词后是中文需要加空格
-                    this.message = this.message.replace(this.reg["wordAfterCN"]," ")
+                    this.message = this.message.replace(this.reg["wordAfterCN"]," ");
+
                 },
                 //单词前根据特定情况增加或去掉空格 这里因为js 内置正则的局限 不支持向前与查询
                 "__wordBefore" : function(){
@@ -172,6 +176,19 @@
                 //百分号后如果为汉字需要加空格
                 "__fuhaoAfter" : function(){
                     this.message = this.message.replace(this.reg["fuhaoAfter"],"$1 ");
+                },
+                "__change_EN_biaodianTo_CN":function (biaodian){
+                    var afterMessage = biaodian;
+                    for(var i in CONTANTENBiaoDian){
+                        var reg = new RegExp(i,"g")
+                        afterMessage = afterMessage.replace(reg,CONTANTENBiaoDian[i]);
+                    }
+                    var regs = /\".*\"/g
+                    afterMessage = afterMessage.replace(regs,function(w){
+                        var nW = w.replace(/\"/g,"");
+                        return "“"+nW+"”"
+                    })
+                    return afterMessage;
                 }
 
             }
