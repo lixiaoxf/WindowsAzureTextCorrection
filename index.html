@@ -93,7 +93,7 @@
             function CNreg (formatStr){
                 this.message = formatStr;
                 this.reg = {
-                    "initMessage":/\s+/g,
+                    "initMessage":/[  ]+/g,
                     "wordMiddleSpace":/\b(\s)+\b/g,
                     "wordAfter":/\b\s+(?=[。，；：！（）])/g,
                     "wordAfterCN":/\b(?=[\u4e00-\u9fa5])/g,
