@@ -102,8 +102,9 @@
                     "wordBeforeCN":/([\u4e00-\u9fa5])\b/g,
                     "fuhaobeforeCN":/([\+\-\*\/])(?=[\u4e00-\u9fa5])/g,
                     "fuhaoafterCN":/([\u4e00-\u9fa5])(?=[\+\-\*\/])/g,
-                    "fuhao,.":/\b[，。](?=[\w\u4e00-\u9fa5])/g,
+                    "fuhao,.":/\b[，。](?=[\w])/g,
                     "fuhaoAfter":/(%)(?=[\u4e00-\u9fa5])/g
+
                 }
             }
             CNreg.prototype = {
