@@ -103,8 +103,8 @@
                     "fuhaobeforeCN":/([\+\-\*\/])(?=[\u4e00-\u9fa5])/g,
                     "fuhaoafterCN":/([\u4e00-\u9fa5])(?=[\+\-\*\/])/g,
                     "fuhao,.":/\b[，。](?=[\w])/g,
-                    "fuhaoAfter":/(%)(?=[\u4e00-\u9fa5])/g
-
+                    "fuhaoAfter":/(%)(?=[\u4e00-\u9fa5])/g,
+                    "spaceinCn":/([\u4e00-\u9fa5])[ ]+([\u4e00-\u9fa5])/g
                 }
             }
             CNreg.prototype = {
@@ -119,11 +119,12 @@
                     this.__numfuhao();
                     this.__fuhaoAfter();
                     return this.message;
-
                 },
-                //对字符串进行初始化把多余空格变为但一空格
                 "__initMessage" : function(){
+					//对字符串进行初始化把多余空格变为但一空格
                     this.message = this.message.replace(this.reg["initMessage"]," ");
+					//中文间空格校验
+					this.message = this.message.replace(this.reg["spaceinCn"],"$1$2");
                 },
                 //把英文标点转换为中文标点
                 "__changeBiaoDian" : function(){
@@ -266,4 +267,3 @@
 
 </body>
 </html>
-
